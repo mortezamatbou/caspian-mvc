@@ -17,8 +17,8 @@ define('CAS_ENV', isset($_SERVER['CAS_ENV']) ? $_SERVER['CAS_ENV'] : 'developmen
 /**
  * for sure that request cross from index.php on root of your site
  */
-define('BASEPATH', './vendor/caspian/');
-define('ROOTAPP', './vendor/');
+define('BASEPATH', './webapp/caspian/');
+define('ROOTAPP', './webapp/');
 
 /**
  * define setting for environment
@@ -42,7 +42,7 @@ switch (CAS_ENV) {
 /**
  * autoload.php -> for include essential files from framework
  */
-require './vendor/bootstrap.php';
+require './webapp/bootstrap.php';
 
 /**
  * for routing this instance is essential
