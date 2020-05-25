@@ -1,3 +1,3 @@
-# gilaki
+# CaspianMVC framework
 
-Gilaki.net Portal website
+lightweight and rapid framework in PHP
