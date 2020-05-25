@@ -1,5 +1,7 @@
 <?php
 
+use Caspian\Core\Routing\Route;
+
 /**
  * you must use regular expression to define your own global route
  * 

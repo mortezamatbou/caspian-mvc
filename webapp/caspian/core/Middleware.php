@@ -1,5 +1,7 @@
 <?php
 
+namespace Caspian\Core\Events;
+
 class Middleware {
 
     public $middlewares;

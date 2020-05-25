@@ -4,6 +4,7 @@
  * you must use regular expression to define your own global route
  * 
  */
+use Caspian\Core\Routing\Route;
 
 $route['404_override'] = '404';
 

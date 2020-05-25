@@ -1,5 +1,12 @@
 <?php
 
+namespace Caspian\Core;
+
+use Caspian\Core\Routing\Route;
+use Caspian\Core\Request\Controller;
+use Caspian\Core\Now;
+use Caspian\Core\Events\Middleware;
+
 /**
  * Reference to the Controller method.
  * Returns current CASPIAN instance object
@@ -7,10 +14,10 @@
  * @return Controller
  */
 function &get_instance() {
-    return Controller::get_instance();
+    return Caspian\Core\Request\Controller::get_instance();
 }
 
-class Caspian {
+class RunApp {
 
     public $lock = FALSE;
 
@@ -106,7 +113,7 @@ class Caspian {
             show_404("Your entry segment is more than valid count of url segment " . count($this->url));
         }
 
-        $defender = new CaspianServiceDefender();
+        $defender = load_class('ServiceDefender', '', 'Caspian\\Core\\Events\\');
 
         $defender->run();
 
@@ -228,8 +235,7 @@ class Caspian {
         if (!$this->middlewares) {
             return;
         }
-        
-        $middleware = load_class('Middleware', $this->middlewares);
+        $middleware = load_class('Middleware', '', 'Caspian\\Core\\Events\\');
         
         $middleware->exec();
         

@@ -47,7 +47,7 @@ require './webapp/bootstrap.php';
 /**
  * for routing this instance is essential
  */
-$boot = new Caspian();
+$boot = new Caspian\Core\RunApp();
 
 //echo '<div class="container" style="font-size: 12px; text-align: center;">' . (microtime(TRUE) - $start) . '</div>';
 

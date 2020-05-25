@@ -53,12 +53,12 @@ if (!function_exists('load_class')) {
      * @param	mixed	an optional argument to pass to the class constructor
      * @return	object
      */
-    function &load_class($class, $param, $main = FALSE) {
+    function &load_class($class, $param = '', $namespace = '', $main = FALSE) {
         static $_classes = array();
 
         // Does the class exist? If so, we're done...
-        if (isset($_classes[$class])) {
-            return $_classes[$class];
+        if (isset($_classes[$namespace . $class])) {
+            return $_classes[$namespace . $class];
         }
 
         $name = FALSE;
@@ -72,7 +72,7 @@ if (!function_exists('load_class')) {
                 $name = $class;
 
                 if (class_exists($name, FALSE) === FALSE) {
-                    require_once($path . '/' . $class . '.php');
+                    require_once($path . '/' . $class . '.php');        
                 }
 
                 break;
@@ -99,8 +99,9 @@ if (!function_exists('load_class')) {
 
         // Keep track of what we just loaded
         is_loaded($class);
-
-        $_classes[$class] = isset($param) ? new $name($param) : new $name();
+        $class_name = $namespace.$name;
+        
+        $_classes[$class] = isset($param) ? new $class_name($param) : new $class_name();
         return $_classes[$class];
     }
 
@@ -162,12 +163,12 @@ function check_global_route($input, $global_route) {
         foreach ($global_route as $pattern => $route) {
             $p = '/^' . $pattern . '$/i';
             if (preg_match($p, $input)) {
-                Now::$is_global_route = TRUE;
+                Caspian\Core\Now::$is_global_route = TRUE;
                 return $route;
             }
         }
     }
-    Now::$is_global_route = FALSE;
+    Caspian\Core\Now::$is_global_route = FALSE;
     return NULL;
 }
 
@@ -179,7 +180,7 @@ function check_global_route($input, $global_route) {
  * @param array $segments this is a array that contain url segments
  */
 function action_method($class_obj, $method_name, $current_segment_num, $segments) {
-    $methods = new ReflectionMethod($class_obj, $method_name);
+    $methods = new \ReflectionMethod($class_obj, $method_name);
     $params = array();
     $number_of_params = $methods->getNumberOfParameters();
     if ($number_of_params) {
@@ -235,7 +236,7 @@ function show_404($error_message = NULL) {
     ob_clean();
     header_remove();
     http_response_code(404);
-    View::show('errors/' . $route['404_override'], ['message' => $error_message]);
+    Caspian\Core\View::show('errors/' . $route['404_override'], ['message' => $error_message]);
     exit();
 }
 

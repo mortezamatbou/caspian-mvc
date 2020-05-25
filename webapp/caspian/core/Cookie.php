@@ -1,5 +1,7 @@
 <?php
 
+namespace Caspian\Core;
+
 class Cookie {
 
     private $cookie;

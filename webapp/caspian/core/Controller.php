@@ -1,5 +1,7 @@
 <?php
 
+namespace Caspian\Core\Request;
+
 class Controller {
     /**
      * Controller is a important class in Caspian Framework, this class connect different section of framework, and ...
@@ -14,55 +16,55 @@ class Controller {
      * 
      * @var $cookie an instance of Cookie class, that class provide methods for 
      * 
-     * @var $log an instance of Log class, that this class provide methods for working with loging and log file manipulating
+     * @var $log an instance of Log class, that this class provide methods for working with logging and log file manipulating
      * 
      * @var $twig an instance of Twig template engine
      * 
      */
 
     /**
-     * @var \View $view
+     * @var \Caspian\Core\View $view
      */
     public $view;
 
     /**
-     * @var \Load $load
+     * @var \Caspian\Core\Load $load
      */
     public $load;
 
     /**
-     * @var \Input
+     * @var \Caspian\Core\Http\Input
      */
     public $input;
 
     /**
-     * @var \Session $session
+     * @var \Caspian\Core\Session $session
      */
     public $session;
 
     /**
-     * @var \Cookie
+     * @var \Caspian\Core\Cookie
      */
     public $cookie;
 
     /**
-     * @var \Log
+     * @var \Caspian\Core\Log
      */
     public $log;
 
     /**
      *
-     * @var \Response
+     * @var \Caspian\Core\Http\Response
      */
     public $response;
 
     /**
-     * @var \DatabaseTools
+     * @var \Caspian\Core\Database\DatabaseTools
      */
     public $db;
 
     /**
-     * @var \Plugin
+     * @var \Caspian\Core\Events\Plugin
      */
     public $plugin;
 
@@ -73,7 +75,7 @@ class Controller {
     public $twig;
 
     /**
-     * @var \Controller
+     * @var \Caspian\Core\Request\Controller
      */
     private static $instance;
 
@@ -86,11 +88,11 @@ class Controller {
 
         self::$instance = & $this;
 
-        $this->view = load_class('View', '');
-        $this->load = load_class('Load', '');
-        $this->input = load_class('Input', '');
-        $this->plugin = load_class('Plugin', '');
-        $this->response = load_class('Response', '');
+        $this->view = load_class('View', '', 'Caspian\\Core\\');
+        $this->load = load_class('Load', '', 'Caspian\\Core\\');
+        $this->input = load_class('Input', '', 'Caspian\\Core\\Http\\');
+        $this->plugin = load_class('Plugin', '', 'Caspian\\Core\\Events\\');
+        $this->response = load_class('Response', '', 'Caspian\\Core\\Http\\');
 
         $twig_path = VIEWS_PATH . (isset($config['template']) && $config['template'] ? '/' . $config['template'] : '');
 
@@ -107,23 +109,23 @@ class Controller {
         /**
          * because Session class in default unattached, before use it must be attached
          */
-        $this->session = load_class('Session', '');
+        $this->session = load_class('Session', '', 'Caspian\\Core\\');
     }
 
     function load_cookie() {
         /**
          * because Cookie class in default unattached, before use it must be attached
          */
-        $this->cookie = load_class('Cookie', '');
+        $this->cookie = load_class('Cookie', '', 'Caspian\\Core\\');
     }
 
     function load_log() {
-        $this->log = load_class('Log', '');
+        $this->log = load_class('Log', '', 'Caspian\\Core\\');
     }
 
     function load_database() {
-        $o = load_class('Model', '');
-        $this->log = load_class('Log', '');
+        $o = load_class('Model', '', 'Caspian\\Core\\Database\\');
+        $this->log = load_class('Log', '', 'Caspian\\Core\\');
         $this->db = $o->db;
     }
 

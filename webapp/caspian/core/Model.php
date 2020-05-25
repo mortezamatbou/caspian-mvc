@@ -1,10 +1,12 @@
 <?php
 
+namespace Caspian\Core\Database;
+
 class Model {
 
     /**
      * this is an instance of DatabaseTools class that allow to us write own method for manipulating to database
-     * @var \DatabaseTools
+     * @var \Caspian\Core\Database\DatabaseTools
      */
     public $db;
 
@@ -47,26 +49,26 @@ class Model {
          * connect to database
          */
         try {
-            $link = new PDO($this->host, $this->user, $this->password);
-            $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $link = new \PDO($this->host, $this->user, $this->password);
+            $link->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             static::$sg_pdo = $link;
-        } catch (PDOException $e) {
+            
+            
+            
+            
+        } catch (\PDOException $e) {
             ob_clean();
             header('HTTP/1.1 500 Internal Server Error.', TRUE, 500);
-            
+
             include ERROR_PAGES_PATH . '/db.php';
-            get_instance()->load_log();
-            get_instance()->log->write($e->getMessage() . ' ' . 'Database Error!', 1500);
+            \Caspian\Core\Request\Controller::get_instance()->load_log();
+            \Caspian\Core\Request\Controller::get_instance()->log->write($e->getMessage() . ' ' . 'Database Error!', 1500);
             if (CAS_ENV === 'development') {
                 echo '<pre>' . $e->getMessage() . '</pre>';
             }
             exit();
         }
 
-        /**
-         * an instance for access to methods that this methods can be work with database
-         */
-        
         /**
          * an instance for access to methods that this methods can be work with database
          */
@@ -78,8 +80,8 @@ class Model {
                 $databse_handle = $db_handle_name;
             }
         }
-        
-        $this->db = new $databse_handle($link);
+        $class_name = "Caspian\\Core\\Database\\" . $databse_handle;
+        $this->db = new $class_name($link);
     }
 
 }
@@ -226,7 +228,6 @@ final class DatabaseTools {
         }
     }
 
-    
     public function query($sql) {
         $statement = $this->pdo->prepare($sql);
         $statement->execute();
@@ -237,8 +238,7 @@ final class DatabaseTools {
         $this->reset_query_builder();
         return NULL;
     }
-    
-    
+
     /**
      * 
      * @param type $table
@@ -274,13 +274,13 @@ final class DatabaseTools {
      * $this->get() method execute function
      */
     private function executeGet() {
-        $this->startTime = time(TRUE);
+        $this->startTime = time();
         $statement = $this->pdo->prepare($this->query_string);
         $statement->execute();
         if ($statement->rowCount() > 0) {
 
             $result = $statement;
-            $this->endTime = time(TRUE) - $this->startTime;
+            $this->endTime = time() - $this->startTime;
             $this->reset_query_builder();
             return $result;
         }
@@ -358,7 +358,6 @@ final class DatabaseTools {
         }
         return FALSE;
     }
-
 
     private function set_pagination() {
         if (!$this->perPage) {
@@ -550,16 +549,15 @@ final class DatabaseTools {
         if ($where) {
             $this->where($where);
         }
-        
+
         if (!$this->from || !$this->where) {
             return NULL;
         }
-        
+
         $this->deleteBuild();
         return $this->execute();
-        
     }
-    
+
     private function deleteBuild() {
         $sql = "DELETE FROM :from: WHERE :where:";
 
@@ -572,7 +570,6 @@ final class DatabaseTools {
         foreach (['from', 'where'] as $statement) {
             $this->quer_string = str_replace(":$statement:", $this->{$statement}, $this->query_string);
         }
-        
     }
 
 }

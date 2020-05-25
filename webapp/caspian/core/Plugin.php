@@ -1,5 +1,7 @@
 <?php
 
+namespace Caspian\Core\Events;
+
 class Plugin {
 
     var $enable = 1;

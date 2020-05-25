@@ -1,5 +1,7 @@
 <?php
 
+use Caspian\Core\Request\Controller;
+
 class Welcome extends Controller {
     
     function __construct() {

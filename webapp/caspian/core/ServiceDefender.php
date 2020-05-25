@@ -1,6 +1,10 @@
 <?php
 
-class CaspianServiceDefender {
+namespace Caspian\Core\Events;
+
+use Caspian\Core\Now;
+
+class ServiceDefender {
 
     public $INI;
     public $message = '';

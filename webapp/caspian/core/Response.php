@@ -1,5 +1,7 @@
 <?php
 
+namespace Caspian\Core\Http;
+
 class Response {
 
     public $statusCode;
@@ -55,20 +57,19 @@ class Response {
 
         exit;
     }
-    
+
     public function send_json($status, $message) {
         $this->addHeader('Content-type: application/json; charset=utf-8');
         $data = [
             'status' => $status,
             'body' => $message
         ];
-        
+
         echo json_encode($data);
-        
+
         exit;
-        
     }
-    
+
     function redirect($to) {
         header('Location: ' . $to);
         exit;

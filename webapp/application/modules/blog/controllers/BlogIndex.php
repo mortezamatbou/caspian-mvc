@@ -1,5 +1,7 @@
 <?php
 
+use Caspian\Core\Request\Controller;
+
 class BlogIndex extends Controller {
     
     function __construct() {

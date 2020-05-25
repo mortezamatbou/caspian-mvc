@@ -1,5 +1,7 @@
 <?php
 
+namespace Caspian\Core;
+
 class Now {
     
     static $route = '/';

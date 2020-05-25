@@ -1,5 +1,7 @@
 <?php
 
+namespace Caspian\Core\Http;
+
 class Input {
 
     /**
@@ -9,7 +11,7 @@ class Input {
     private $security;
 
     function __construct() {
-        $this->security = new Security();
+        $this->security = load_class('Security', '', 'Caspian\\Core\\');
     }
 
     /**
@@ -22,7 +24,6 @@ class Input {
      * if $clean be 2 this use add slashes method and use \ before double 
      * 
      * @param string $item
-     * @param int $clean
      * 
      * @return mixed return a string if value valid or NULL
      */

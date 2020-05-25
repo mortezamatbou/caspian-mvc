@@ -1,5 +1,7 @@
 <?php
 
+namespace Caspian\Core\Routing;
+
 /**
  * Description of Route
  *

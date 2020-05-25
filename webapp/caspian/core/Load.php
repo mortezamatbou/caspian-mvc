@@ -1,5 +1,7 @@
 <?php
 
+namespace Caspian\Core;
+
 /**
  * this class include common methods that is could essential or not
  * for example include a helper file to framework for use
@@ -25,10 +27,11 @@ class Load {
         // use singleton method &load_class for loading
         include_once MODELS_PATH . '/' . $model_name . '.php';
         if ($obj) {
+            $class_name = 'Caspian\\Core\\Database\\' . $model_name;
             if ($param) {
-                return new $model_name($param);
+                return new $class_name($param);
             }
-            return new $model_name();
+            return new $class_name();
         }
     }
     public function model_($model_name, $obj = false, $param = NULL) {

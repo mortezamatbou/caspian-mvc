@@ -46,18 +46,18 @@ require APPPATH . 'config/plugins.php';
 require BASEPATH . 'core/Hook.php';
 require BASEPATH . 'core/Common.php';
 
-$__hook = new Hook();
+$__hook = new Caspian\Core\Events\Hook();
 hooking('pre_system');
 
 $_CORE = array(
-    'Log',
-    'Now',
-    'Security',
-    'Model',
-    'Response',
-    'Controller',
-    'DebugInfo',
-    'CaspianServiceDefender'
+    'Log' => 'Caspian\\Core\\',
+    'Now' => 'Caspian\\Core\\',
+    'Security' => 'Caspian\\Core\\',
+//    'Model' => 'Caspian\\Core\\Database\\',
+    'Response' => 'Caspian\\Core\\Http\\',
+    'Controller' => 'Caspian\\Core\\Request\\',
+    'DebugInfo' => 'Caspian\\Core\\Events\\',
+    'ServiceDefender' => 'Caspian\\Core\\Events\\'
 );
 
 // this load before core class and controller
@@ -65,12 +65,12 @@ if (file_exists('./vendor/autoload.php')) {
     require './vendor/autoload.php';
 }
 
-foreach ($_CORE as $file_name) {
-    load_class($file_name, '');
+foreach ($_CORE as $file_name => $namespace) {
+    load_class($file_name, '', $namespace);
 }
 
 // plugin too service framework nist
 $__plugin = NULL;
 
-require BASEPATH . 'core/Caspian.php';
+require BASEPATH . 'core/RunApp.php';
 
