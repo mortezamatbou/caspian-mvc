@@ -6,7 +6,7 @@ class CaspianServiceDefender {
     public $message = '';
 
     function __construct() {
-        $this->INI = parse_ini_file(ROOTAPP . 'service.ini', TRUE);
+        $this->INI = parse_ini_file(ROOTAPP . 'config/service.ini', TRUE);
         DebugInfo::$enable = $this->INI['info']['debug'] ? TRUE : FALSE;
     }
 
