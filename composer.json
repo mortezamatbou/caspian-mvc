@@ -1,11 +1,23 @@
 {
-    "require": {
-        "twig/twig": "^3.0",
-        "firebase/php-jwt": "^5.2"
+    "description": "CaspianPHP",
+    "authors": [
+        {
+            "name": "Caspian PHP"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^9"
     },
     "autoload": {
         "psr-4": {
-            "Caspian\\Middleware\\Hi\\": "webapp/middlewares/hi"
+            "App\\": "app/",
+            "Caspian\\": "caspian/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
         }
     }
 }

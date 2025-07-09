@@ -1,3 +1,6 @@
-/nbproject/
-/composer.lock
-/vendor/
+.idea
+nbproject
+vendor
+composer.lock
+.env
+/.phpunit.result.cache

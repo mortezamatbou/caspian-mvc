@@ -1,15 +1,18 @@
-#Options +FollowSymlinks
-RewriteEngine on
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
 
-Options -indexes
+    RewriteEngine On
 
-ErrorDocument 401 http://localhost/
-ErrorDocument 403 http://localhost/
-# ErrorDocument 404 http://localhost/rondbit/Welcome
-ErrorDocument 500 http://localhost/
+    RewriteCond %{REQUEST_FILENAME} -d [OR]
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ ^$1 [N]
 
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-l
+    RewriteCond %{REQUEST_URI} (\.\w+$) [NC]
+    RewriteRule ^(.*)$ public/$1
 
-RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ public/index.php
+</IfModule>

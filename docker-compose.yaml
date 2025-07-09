@@ -1,0 +1,17 @@
+services:
+  app:
+    build:
+      context: ./
+      target: builder
+      args:
+          - USER_ID=${USER_ID:-1000}
+          - GROUP_ID=${GROUP_ID:-1000}
+    ports:
+      - '9090:80'
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - caspian
+
+networks:
+  caspian: { }
