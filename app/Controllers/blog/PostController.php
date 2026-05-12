@@ -4,7 +4,8 @@ namespace App\Controllers\blog;
 
 use Caspian\Controller;
 
-class PostController extends Controller {
+class PostController extends Controller
+{
 
     function __construct()
     {

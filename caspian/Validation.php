@@ -2,7 +2,8 @@
 
 namespace Caspian;
 
-class Validation {
+class Validation
+{
 
     private array $items = [];
     private array $values = [];
@@ -23,10 +24,7 @@ class Validation {
         $this->method = in_array(strtolower(trim($method)), ['GET', 'POST', 'PUT', 'DELETE']) ? strtolower(trim($method)) : 'GET';
     }
 
-    protected function add($name, $rule)
-    {
-        
-    }
+    protected function add($name, $rule) {}
 
     protected function check(): bool
     {

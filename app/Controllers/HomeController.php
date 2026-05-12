@@ -3,8 +3,10 @@
 namespace App\Controllers;
 
 use Caspian\Controller;
+use Caspian\Database;
 
-class HomeController extends Controller {
+class HomeController extends Controller
+{
 
     function __construct()
     {

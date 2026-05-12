@@ -2,17 +2,8 @@
 
 namespace Caspian;
 
-class Controller {
+class Controller
+{
 
-    public $langController;
-
-    function __construct()
-    {
-        
-    }
-
-    public function test()
-    {
-        
-    }
+    function __construct() {}
 }

@@ -2,7 +2,8 @@
 
 namespace App\Registers;
 
-class RouteRegister {
+class RouteRegister
+{
 
     public array $routes = [];
     public array $bind_segments = [
@@ -13,6 +14,8 @@ class RouteRegister {
         'model' => '[a-zA-Z0-9_-]+',
         'repository' => '[a-zA-Z0-9_-]+'
     ];
+
+    public array $registers = [];
 
     public function boot(): void
     {

@@ -2,7 +2,8 @@
 
 namespace Caspian;
 
-class Route {
+class Route
+{
 
     private string $namespace;
     private string $method;
@@ -54,9 +55,6 @@ class Route {
             $namespace = $param->getType()->getName();
             $params[] = new $namespace($input['value']);
         }
-
-        // check middlewares
-        // $this->check_middlewares();
 
         return call_user_func_array(array($this->controller, $this->method), $params);
     }

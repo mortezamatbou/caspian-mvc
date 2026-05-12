@@ -2,7 +2,8 @@
 
 namespace Caspian;
 
-class Router {
+class Router
+{
 
     private static $route_get = [];
     private static $route_post = [];
@@ -62,25 +63,25 @@ class Router {
         self::checkup($route, $action, $middleware);
     }
 
-    public static function post($route, array $action, array $middleware = []): void
+    public static function post($route, $action, array $middleware = []): void
     {
         self::$method = 'POST';
         self::checkup($route, $action, $middleware);
     }
 
-    public static function delete(string $route, string $action, array $middleware = []): void
+    public static function delete($route, $action, array $middleware = []): void
     {
         self::$method = 'DELETE';
         self::checkup($route, $action, $middleware);
     }
 
-    public static function put(string $route, string $action, array $middleware = []): void
+    public static function put($route, $action, array $middleware = []): void
     {
         self::$method = 'PUT';
         self::checkup($route, $action, $middleware);
     }
 
-    public static function any(string $route, string $action, array $middleware = []): void
+    public static function any($route, $action, array $middleware = []): void
     {
         self::$method = 'ANY';
         self::checkup($route, $action, $middleware);

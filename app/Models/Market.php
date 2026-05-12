@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-class Market {
+use Caspian\Model;
 
-    function __construct()
-    {
-        
-    }
+class Market extends Model
+{
+
+    function __construct() {}
 
     public function name(): string
     {

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Validation\String;
 
-class StringStartWithTest extends \PHPUnit\Framework\TestCase {
+class StringStartWithTest extends \PHPUnit\Framework\TestCase
+{
 
     public function get_data(): array
     {

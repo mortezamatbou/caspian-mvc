@@ -4,7 +4,8 @@ namespace App\Controllers\api;
 
 use Caspian\Controller;
 
-class ApiController extends Controller {
+class ApiController extends Controller
+{
 
     function __construct()
     {
@@ -15,7 +16,7 @@ class ApiController extends Controller {
     {
         echo "api.index";
     }
-    
+
     public function others(string $others)
     {
         echo "api.others = {$others}";
@@ -35,6 +36,4 @@ class ApiController extends Controller {
     {
         echo "api.pairs.funds.etf  country={$country} - id={$user->name()}/{$user->id()}";
     }
-    
-    
 }

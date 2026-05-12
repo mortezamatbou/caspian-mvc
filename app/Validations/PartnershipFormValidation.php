@@ -2,9 +2,10 @@
 
 namespace App\Validation;
 
-use Core\Validation;
+use Caspian\Validation;
 
-class PartnershipFormValidation extends Validation {
+class PartnershipFormValidation extends Validation
+{
 
     function __construct($mode = 'API', $method = 'GET')
     {

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Validation\Null;
 
-class NullTest extends \PHPUnit\Framework\TestCase {
+class NullTest extends \PHPUnit\Framework\TestCase
+{
 
     public function get_data(): array
     {
