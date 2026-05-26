@@ -1,6 +1,6 @@
 <?php
 
-use Caspian\Database;
+use Caspian\Core\Database;
 
 $db = [
     'default' => [

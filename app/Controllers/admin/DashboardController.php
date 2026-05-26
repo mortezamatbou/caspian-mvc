@@ -4,7 +4,7 @@ namespace App\Controllers\admin;
 
 use Caspian\Core\Controller;
 
-class PostController extends Controller
+class DashboardController extends Controller
 {
 
     function __construct()
