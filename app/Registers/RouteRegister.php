@@ -20,8 +20,7 @@ class RouteRegister
     public function boot(): void
     {
         $this->routes['/'] = 'web';
-        $this->routes['api/v1'] = 'api';
-        $this->routes['blog'] = 'blog';
+        $this->routes['api'] = 'api';
     }
 
     public function registers(): array

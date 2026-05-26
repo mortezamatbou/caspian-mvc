@@ -1,6 +1,5 @@
 <?php
 
-
 function send_response_json($response, $status = 200)
 {
     header('Content-type: application/json');
@@ -41,3 +40,5 @@ if (!function_exists('ci_remove_invisible_characters')) {
         return $str;
     }
 }
+
+

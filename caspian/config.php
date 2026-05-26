@@ -15,3 +15,4 @@ function pre_print($data, $pre = 'pre')
     }
     exit;
 }
+define('VIEWS_PATH', realpath(__DIR__ . '/../templates'));

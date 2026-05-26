@@ -2,8 +2,10 @@
 
 namespace App\Controllers\api;
 
-use Caspian\Controller;
+use Caspian\Core\Controller;
 
+class ApiController extends Controller
+{
 class ApiController extends Controller
 {
 

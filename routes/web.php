@@ -1,8 +1,9 @@
 <?php
 
-use Caspian\Router as Router;
-use App\Controllers\HomeController;
+use Caspian\Core\Router as Router;
+use App\Controllers\LoginController;
 
-Router::get('/', [HomeController::class, 'index']);
-Router::get('/contact-us', [HomeController::class, 'contact_us']);
-//Router::post('midd/test', [Second::class, 'index'], ['Captcha.TestMiddleware' => []]);
+Router::get('/', [LoginController::class, 'index']);
+Router::post('/login', [LoginController::class, 'login']);
+
+Router::get('/test/{song:model}', [LoginController::class, 'test']);

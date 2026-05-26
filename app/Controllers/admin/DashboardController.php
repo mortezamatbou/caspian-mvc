@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controllers\blog;
+namespace App\Controllers\admin;
 
-use Caspian\Controller;
+use Caspian\Core\Controller;
 
 class PostController extends Controller
 {

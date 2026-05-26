@@ -10,20 +10,20 @@ class NullTest extends \PHPUnit\Framework\TestCase
     public function get_data(): array
     {
         return [
-            ['0' => '  ', 'expected' => TRUE],
-            ['1' => '', 'expected' => TRUE],
-            ['2' => '  a', 'expected' => FALSE],
-            ['3' => NULL, 'expected' => TRUE],
-            ['4' => 0, 'expected' => TRUE],
-            ['5' => ' 0', 'expected' => TRUE],
-            ['6' => '0', 'expected' => TRUE],
-            ['7' => -1, 'expected' => FALSE],
-            ['8' => 10, 'expected' => FALSE],
-            ['9' => '10', 'expected' => FALSE],
-            ['10' => TRUE, 'expected' => FALSE],
-            ['11' => FALSE, 'expected' => TRUE],
-            ['12' => [], 'expected' => TRUE],
-            ['13' => [1], 'expected' => FALSE],
+            ['0'  =>   '  ',    'expected' => TRUE],
+            ['1'  =>   '',      'expected' => TRUE],
+            ['2'  =>   '  a',   'expected' => FALSE],
+            ['3'  =>   NULL,    'expected' => TRUE],
+            ['4'  =>   0,       'expected' => TRUE],
+            ['5'  =>   ' 0',    'expected' => TRUE],
+            ['6'  =>   '0',     'expected' => TRUE],
+            ['7'  =>   -1,      'expected' => FALSE],
+            ['8'  =>   10,      'expected' => FALSE],
+            ['9'  =>   '10',    'expected' => FALSE],
+            ['10' =>   TRUE,    'expected' => FALSE],
+            ['11' =>   FALSE,   'expected' => TRUE],
+            ['12' =>   [],      'expected' => TRUE],
+            ['13' =>   [1],     'expected' => FALSE],
         ];
     }
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Caspian;
+namespace Caspian\Core;
 
-use \Caspian\Route;
 use \App\Registers\RouteRegister;
+use Caspian\Http\Request;
 
 class Loader
 {
@@ -20,6 +20,7 @@ class Loader
 
     function __construct()
     {
+        Registry::set('request', new Request());
         $this->uri = $this->get_request_uri();
 
         $uri = Tools::trunc_uri($this->uri);

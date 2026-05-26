@@ -1,6 +1,6 @@
 <?php
 
-namespace Caspian;
+namespace Caspian\Core;
 
 class Tools
 {

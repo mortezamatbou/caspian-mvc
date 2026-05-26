@@ -10,7 +10,7 @@ class Test extends \PHPUnit\Framework\TestCase
     public function get_data(): array
     {
         return [
-            ['item' => '  ', 'expected' => FALSE],
+            ['item' => '  ',  'expected' => FALSE],
             ['item' => '  a', 'expected' => TRUE]
         ];
     }
