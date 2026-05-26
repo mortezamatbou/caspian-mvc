@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Validation\String;
 
-class StringStartWithTest extends \PHPUnit\Framework\TestCase {
+class StringStartWithTest extends \PHPUnit\Framework\TestCase
+{
 
     public function get_data(): array
     {
@@ -18,10 +19,10 @@ class StringStartWithTest extends \PHPUnit\Framework\TestCase {
     public function get_data_2(): array
     {
         return [
-            ['item 1' => 'my_word', 'startWith' => 'my_', 'expected' => TRUE],
-            ['item 2' => 'my_word', 'startWith' => 'My_', 'expected' => TRUE],
-            ['item 3' => 'my_word', 'startWith' => 'my-', 'expected' => FALSE],
-            ['item 4' => '09358094771', 'startWith' => '0935', 'expected' => TRUE]
+            ['item 1' => 'my_word',     'startWith' => 'my_',   'expected' => TRUE],
+            ['item 2' => 'my_word',     'startWith' => 'My_',   'expected' => TRUE],
+            ['item 3' => 'my_word',     'startWith' => 'my-',   'expected' => FALSE],
+            ['item 4' => '09358094771', 'startWith' => '0935',  'expected' => TRUE]
         ];
     }
 

@@ -1,8 +1,9 @@
 <?php
 
-namespace Caspian;
+namespace Caspian\Core;
 
-class Tools {
+class Tools
+{
 
     public static function trunc_route(string $route): string
     {

@@ -1,6 +1,6 @@
 <?php
 
-use Caspian\Router as Router;
+use Caspian\Core\Router as Router;
 use App\Controllers\api\ApiController;
 
 Router::get('/', [ApiController::class, 'index']);

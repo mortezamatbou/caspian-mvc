@@ -1,8 +1,11 @@
 <?php
 
-namespace Caspian;
+namespace Caspian\Core;
 
-class Route {
+use ReflectionClass;
+
+class Route
+{
 
     private string $namespace;
     private string $method;
@@ -43,21 +46,27 @@ class Route {
     public function action_method()
     {
         $reflection = new \ReflectionMethod($this->controller, $this->method);
+
         $params = [];
 
         foreach ($reflection->getParameters() as $param) {
-            $input = $this->call_input[$param->getName()];
+
+            $input = isset($this->call_input[$param->getName()]) ? $this->call_input[$param->getName()] : NULL;
+
+            if ($param->hasType() && !$input) {
+                $params[] = new ($param->getType()->getName())();
+                continue;
+            }
+
             if (!$param->hasType() || in_array($input['type'], ['any', 'num', 'num_gtz'])) {
                 $params[] = $input['value'];
                 continue;
             }
-            $namespace = $param->getType()->getName();
-            $params[] = new $namespace($input['value']);
+
+
+            $params[] = new ($param->getType()->getName())($input['value']);
+
         }
-
-        // check middlewares
-        // $this->check_middlewares();
-
         return call_user_func_array(array($this->controller, $this->method), $params);
     }
 

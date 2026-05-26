@@ -2,7 +2,8 @@
 
 namespace App\Registers;
 
-class RouteRegister {
+class RouteRegister
+{
 
     public array $routes = [];
     public array $bind_segments = [
@@ -14,11 +15,12 @@ class RouteRegister {
         'repository' => '[a-zA-Z0-9_-]+'
     ];
 
+    public array $registers = [];
+
     public function boot(): void
     {
         $this->routes['/'] = 'web';
-        $this->routes['api/v1'] = 'api';
-        $this->routes['blog'] = 'blog';
+        $this->routes['api'] = 'api';
     }
 
     public function registers(): array

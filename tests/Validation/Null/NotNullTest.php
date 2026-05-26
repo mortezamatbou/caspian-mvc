@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\Validation\Null;
 
-class NotNullTest extends \PHPUnit\Framework\TestCase {
+class NotNullTest extends \PHPUnit\Framework\TestCase
+{
 
     public function get_data(): array
     {
         return [
-            ['item' => '  ', 'expected' => FALSE],
-            ['item' => '  a', 'expected' => TRUE],
-            ['item' => 1, 'expected' => TRUE],
+            ['item' => '  ',   'expected' => FALSE],
+            ['item' => '  a',  'expected' => TRUE],
+            ['item' => 1,      'expected' => TRUE],
             ['item' => "1 2 ", 'expected' => TRUE],
         ];
     }

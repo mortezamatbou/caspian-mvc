@@ -1,8 +1,14 @@
 <?php
 
-namespace Caspian;
+namespace Caspian\Input;
 
-class Validation {
+use Caspian\Core\Registry;
+use Caspian\Http\Request;
+
+class Validator
+{
+
+    protected Request $request;
 
     private array $items = [];
     private array $values = [];
@@ -12,21 +18,23 @@ class Validation {
 
     const MODE_API = 'API';
     const MODE_WEB = 'WEB';
+
     const METHOD_GET = 'GET';
     const METHOD_POST = 'POST';
     const METHOD_PUT = 'PUT';
     const METHOD_DELETE = 'DELETE';
 
-    function __construct($mode = 'API', $method = 'GET')
+
+    function __construct()
     {
-        $this->mode = in_array(strtoupper(trim($mode)), ['WEB', 'API']) ? strtolower(trim($mode)) : 'API';
-        $this->method = in_array(strtolower(trim($method)), ['GET', 'POST', 'PUT', 'DELETE']) ? strtolower(trim($method)) : 'GET';
+        $this->request = Registry::get('request');
+        $this->method = $this->request->method();
+        // $this->mode = in_array(strtoupper(trim($mode)), ['WEB', 'API']) ? strtolower(trim($mode)) : 'API';
     }
 
-    protected function add($name, $rule)
-    {
-        
-    }
+
+    protected function add($name, $rule) {}
+
 
     protected function check(): bool
     {
@@ -39,8 +47,9 @@ class Validation {
         return $success;
     }
 
-    protected function get_data()
+
+    public function request(): Request
     {
-        return 'aa';
+        return $this->request;
     }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Controllers\api;
 
-use Caspian\Controller;
+use Caspian\Core\Controller;
 
-class ApiController extends Controller {
+class ApiController extends Controller
+{
 
     function __construct()
     {
@@ -15,26 +16,4 @@ class ApiController extends Controller {
     {
         echo "api.index";
     }
-    
-    public function others(string $others)
-    {
-        echo "api.others = {$others}";
-    }
-
-    public function markets()
-    {
-        echo "api.markets";
-    }
-
-    public function market(\App\Models\Market $market)
-    {
-        echo "api.markets name={$market->name()}";
-    }
-
-    public function etf(string $country, \App\Models\User $user)
-    {
-        echo "api.pairs.funds.etf  country={$country} - id={$user->name()}/{$user->id()}";
-    }
-    
-    
 }

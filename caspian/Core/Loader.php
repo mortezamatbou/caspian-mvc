@@ -1,11 +1,12 @@
 <?php
 
-namespace Caspian;
+namespace Caspian\Core;
 
-use \Caspian\Route;
 use \App\Registers\RouteRegister;
+use Caspian\Http\Request;
 
-class Loader {
+class Loader
+{
 
     private string $uri;
     private string $path;
@@ -19,6 +20,7 @@ class Loader {
 
     function __construct()
     {
+        Registry::set('request', new Request());
         $this->uri = $this->get_request_uri();
 
         $uri = Tools::trunc_uri($this->uri);
@@ -37,52 +39,36 @@ class Loader {
     private function exec(): void
     {
         $register = $this->load($this->path, $this->register);
+        
         require_once("../routes/{$register['type']}.php");
+        
         $this->route_path = $register['route'];
 
         $routing = $this->routing($register['register_count']);
+
         if (!$routing) {
             pre_print('404 Not Found');
             exit();
         }
 
         $this->route = new Route(
-                $routing['controller'],
-                $routing['method'],
-                $this->path,
-                $this->query,
-                $this->route_path,
-                $this->segments,
-                $routing['call_input'],
-                $register['type'],
-                $register['register'],
-                $register['register_count']
+            $routing['controller'],
+            $routing['method'],
+            $this->path,
+            $this->query,
+            $this->route_path,
+            $this->segments,
+            $routing['call_input'],
+            $register['type'],
+            $register['register'],
+            $register['register_count']
         );
-//        pre_print($register);
-//        pre_print($this->route);
-//        pre_print([$register, $this->path]);
-//        pre_print($routing);
+        Registry::set('db', Database::getPDO());
     }
 
     private function get_request_uri()
     {
         return $_SERVER['REQUEST_URI'];
-    }
-
-    public function middlewares()
-    {
-        return isset($this->route_info['middlewares']) ? $this->route_info['middlewares'] : [];
-    }
-
-    private function check_middlewares()
-    {
-        $middlewares_list = $this->middlewares();
-        if (!$middlewares_list) {
-            return;
-        }
-
-        $midd_obj = new \Core\MiddlewareHandler($middlewares_list);
-        $midd_obj->start($this->route_info['call_input']);
     }
 
     private function routing(int $register_count): ?array
@@ -130,15 +116,16 @@ class Loader {
         $type = 'web';
         $register = '/';
         $route = $path;
-
+        
         if ($path == '/') {
             return ['type' => $type, 'register' => $register, 'route' => $route, 'register_count' => 0];
         }
-
+        
         $url_segments = explode('/', $path);
-
+        
         $segment = '';
         $i = 0;
+        
         foreach ($url_segments as $s) {
             if ($i == 0) {
                 $segment = $s;
@@ -154,10 +141,17 @@ class Loader {
             }
             $i++;
         }
+        
         if ($route == '') {
             $route = '/';
         }
-        return ['type' => $type, 'register' => $register, 'route' => $route, 'register_count' => count(explode('/', $register))];
+        
+        return [
+            'type' => $type,
+            'register' => $register,
+            'route' => $route,
+            'register_count' => $register != '/' ? count(explode('/', $register)) : 0
+        ];
     }
 
     function run()

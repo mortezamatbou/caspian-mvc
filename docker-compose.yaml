@@ -13,5 +13,21 @@ services:
     networks:
       - caspian
 
+  mariadb:
+    image: mariadb:11.4
+    ports:
+      - "3306:3306"
+    environment:
+      - MARIADB_ROOT_PASSWORD=root
+      - MARIADB_ALLOW_EMPTY_PASSWORD=true
+      - MARIADB_USER=musicuser
+      - MARIADB_PASSWORD=musicpass
+      - MARIADB_DATABASE=musicdb
+    volumes:
+      - "~/docker-volume/muzik/mariadb:/var/lib/mysql"
+      # - "./entrypoints/0001.init.sql:/docker-entrypoint-initdb.d/init.sql"
+    networks:
+      - caspian
+
 networks:
   caspian: { }
