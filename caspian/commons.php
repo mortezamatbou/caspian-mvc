@@ -2,17 +2,26 @@
 
 use Caspian\Core\Registry;
 use Caspian\Core\Route;
+use Caspian\Input\Validator;
+use Caspian\Input\ValidatorInterface;
 
-function send_response_json(array $response, $status = 200)
+function send_response_json(array $response, $status = 200, $extra = [])
 {
     header('Content-type: application/json');
-    echo json_encode(['status' => $status, 'body' => $response]);
+    echo json_encode(['status' => $status, 'body' => $response, 'extra' => $extra]);
     exit;
 }
 
-function route(): Route {
+function route(): Route
+{
     return Registry::get('loader')->route();
 }
+
+function validate(ValidatorInterface $validator): Validator
+{
+    return new Validator($validator);
+}
+
 
 if (!function_exists('ci_remove_invisible_characters')) {
     /**
@@ -46,5 +55,3 @@ if (!function_exists('ci_remove_invisible_characters')) {
         return $str;
     }
 }
-
-

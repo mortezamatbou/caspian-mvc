@@ -2,7 +2,9 @@
 
 namespace Caspian\Core;
 
-use ReflectionClass;
+use Caspian\Core\Validator;
+use Caspian\Core\ValidatorInterface;
+use Exception;
 
 class Route
 {
@@ -50,22 +52,28 @@ class Route
         $params = [];
 
         foreach ($reflection->getParameters() as $param) {
-
+            $class = $param->getType()->getName();
             $input = isset($this->call_input[$param->getName()]) ? $this->call_input[$param->getName()] : NULL;
 
+
             if ($param->hasType() && !$input) {
-                $params[] = new ($param->getType()->getName())();
-                continue;
-            }
-
-            if (!$param->hasType() || in_array($input['type'], ['any', 'num', 'num_gtz'])) {
+                $params[] = new $class();
+            } elseif (!$param->hasType() || in_array($input['type'], ['any', 'num', 'num_gtz'])) {
                 $params[] = $input['value'];
-                continue;
+            } else {
+                $params[] = new $class($input['value']);
             }
-
-
-            $params[] = new ($param->getType()->getName())($input['value']);
-
+            if (is_subclass_of($class, ValidatorInterface::class)) {
+                # latest index is subclass of ValidatorInterface
+                try {
+                    $validate = new Validator($params[sizeof($params) - 1]);
+                    if ($validate->auto()) {
+                        $validate->checkup();
+                    }
+                } catch (Exception $ex) {
+                    send_response_json([], 422);
+                }
+            }
         }
         return call_user_func_array(array($this->controller, $this->method), $params);
     }

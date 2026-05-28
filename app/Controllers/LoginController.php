@@ -22,7 +22,6 @@ class LoginController extends Controller
 
     public function test(Song $song, LoginRequest $login)
     {
-        pre_print($login->route_mode());
         pre_print($song->get_song());
     }
 

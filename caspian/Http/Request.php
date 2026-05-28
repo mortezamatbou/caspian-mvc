@@ -81,7 +81,7 @@ class Request
         return $this->files[$key] ?? null;
     }
 
-    public function input(?string $key = null, $default = null)
+    public function body(?string $key = null, $default = null)
     {
         if ($this->input === null) {
             $this->parse_input();
@@ -97,12 +97,12 @@ class Request
 
     public function all(): array
     {
-        return array_merge($this->get, $this->post, $this->input());
+        return array_merge($this->get, $this->post, $this->body());
     }
 
     public function has(string $key): bool
     {
-        return isset($this->get[$key]) || isset($this->post[$key]) || isset($this->input()[$key]);
+        return isset($this->get[$key]) || isset($this->post[$key]) || isset($this->body()[$key]);
     }
 
     public function only(array $keys): array
