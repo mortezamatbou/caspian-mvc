@@ -1,12 +1,18 @@
 <?php
 
-function send_response_json($response, $status = 200)
+use Caspian\Core\Registry;
+use Caspian\Core\Route;
+
+function send_response_json(array $response, $status = 200)
 {
     header('Content-type: application/json');
     echo json_encode(['status' => $status, 'body' => $response]);
     exit;
 }
 
+function route(): Route {
+    return Registry::get('loader')->route();
+}
 
 if (!function_exists('ci_remove_invisible_characters')) {
     /**

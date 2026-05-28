@@ -39,9 +39,9 @@ class Loader
     private function exec(): void
     {
         $register = $this->load($this->path, $this->register);
-        
+
         require_once("../routes/{$register['type']}.php");
-        
+
         $this->route_path = $register['route'];
 
         $routing = $this->routing($register['register_count']);
@@ -75,6 +75,7 @@ class Loader
     {
         $controller = '';
         $method = '';
+        $call_input = [];
         foreach (Router::routes() as $pattern => $r) {
             $call_input = [];
             $pattern = Tools::trunc_route($pattern);
@@ -116,16 +117,16 @@ class Loader
         $type = 'web';
         $register = '/';
         $route = $path;
-        
+
         if ($path == '/') {
             return ['type' => $type, 'register' => $register, 'route' => $route, 'register_count' => 0];
         }
-        
+
         $url_segments = explode('/', $path);
-        
+
         $segment = '';
         $i = 0;
-        
+
         foreach ($url_segments as $s) {
             if ($i == 0) {
                 $segment = $s;
@@ -141,11 +142,11 @@ class Loader
             }
             $i++;
         }
-        
+
         if ($route == '') {
             $route = '/';
         }
-        
+
         return [
             'type' => $type,
             'register' => $register,
@@ -157,9 +158,14 @@ class Loader
     function run()
     {
         if (!$this->route->valid_method()) {
-            pre_print("Route {$this->route->get_namespace()} does not {$this->route->get_method()}");
+            pre_print("Route {$this->route->namespace()} does not {$this->route->method()}");
         }
 
         $this->route->action_method();
+    }
+
+    public function route(): Route
+    {
+        return $this->route;
     }
 }

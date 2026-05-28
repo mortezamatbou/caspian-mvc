@@ -70,22 +70,22 @@ class Route
         return call_user_func_array(array($this->controller, $this->method), $params);
     }
 
-    public function get_namespace(): string
+    public function namespace(): string
     {
         return $this->namespace;
     }
 
-    public function get_method(): string
+    public function method(): string
     {
         return $this->method;
     }
 
-    public function get_path(): string
+    public function path(): string
     {
         return $this->path;
     }
 
-    public function get_query(): string
+    public function query(): string
     {
         return $this->query;
     }
@@ -95,20 +95,22 @@ class Route
         return $this->route;
     }
 
-    public function get_segments(int $i = 0): string|array
+    public function segments(): array
     {
-        if ($i) {
-            return isset($this->segments[$i]) && $i >= 0 ? $this->segments[$i] : '';
-        }
         return $this->segments;
     }
 
-    public function get_type(): string
+    public function segment(int $i): float|int|null|string
+    {
+        return isset($this->segments[$i]) ? $this->segments[$i] : '';
+    }
+
+    public function type(): string
     {
         return $this->type;
     }
 
-    public function get_register(): string
+    public function register(): string
     {
         return $this->register;
     }
