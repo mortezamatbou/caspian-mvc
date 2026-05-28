@@ -2,8 +2,8 @@
 
 use Caspian\Core\Registry;
 use Caspian\Core\Route;
-use Caspian\Input\Validator;
-use Caspian\Input\ValidatorInterface;
+use Caspian\Core\Validator;
+use Caspian\Core\ValidatorInterface;
 
 function send_response_json(array $response, $status = 200, $extra = [])
 {
